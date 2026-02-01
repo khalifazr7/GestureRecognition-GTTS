@@ -125,7 +125,9 @@ function onResults(results) {
     
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    // Optimization: Do NOT draw the video image on canvas. 
+    // The <video> element behind it already shows the feed.
+    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     
     if (results.multiHandLandmarks) {
         for (const landmarks of results.multiHandLandmarks) {
@@ -157,7 +159,7 @@ const hands = new Hands({locateFile: (file) => {
 
 hands.setOptions({
     maxNumHands: 1,
-    modelComplexity: 0,
+    modelComplexity: 0, // Lite Model for max FPS at HD resolution
     minDetectionConfidence: 0.5,
     minTrackingConfidence: 0.5
 });
