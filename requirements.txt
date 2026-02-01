@@ -1,7 +1,0 @@
-mediapipe
-opencv-python
-gTTS
-pygame
-numpy
-streamlit
-streamlit-webrtc
