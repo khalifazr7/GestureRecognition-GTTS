@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI GestureGenius - Voice Assistant</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- MediaPipe Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background-globes">
+      <div class="globe globe-1"></div>
+      <div class="globe globe-2"></div>
+      <div class="globe globe-3"></div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Memuat AI Model...</p>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <header>
+        <div class="logo">
+          <i class="ri-hand-coin-fill"></i>
+          <span>GestureGenius</span>
+        </div>
+        <div class="status-badge" id="ai-status">
+          <span class="dot"></span> AI Active
+        </div>
+      </header>
+
+      <!-- Main Content Grid -->
+      <main class="main-grid">
+        <!-- Video Section -->
+        <div class="video-card glass-panel">
+          <div class="video-wrapper">
+            <video id="input_video"></video>
+            <canvas id="output_canvas"></canvas>
+
+            <!-- Floating Overlay -->
+            <div class="gesture-overlay" id="gesture-overlay">
+              <span class="emoji">👋</span>
+              <span class="text">Menunggu Gesture...</span>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button
+              class="btn btn-secondary"
+              id="toggle-cam"
+              onclick="toggleCamera()"
+            >
+              <i class="ri-camera-off-line"></i> Stop Camera
+            </button>
+            <button
+              class="btn btn-primary"
+              id="toggle-voice"
+              onclick="toggleVoice()"
+            >
+              <i class="ri-volume-up-line"></i> Suara Aktif
+            </button>
+          </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-sidebar">
+          <!-- Last Spoken Card -->
+          <div class="output-card glass-panel">
+            <h3><i class="ri-chat-voice-line"></i> Terjemahan</h3>
+            <div class="speech-bubble" id="speech-text">
+              "Silakan lakukan gerakan tangan..."
+            </div>
+          </div>
+
+          <!-- Guide Grid -->
+          <div class="guide-card glass-panel">
+            <h3><i class="ri-book-open-line"></i> Kamus Gesture</h3>
+            <div class="gesture-grid">
+              <div class="gesture-item" title="Halo">
+                <span class="g-icon">☝️</span> <span class="g-label">Halo</span>
+              </div>
+              <div class="gesture-item" title="Perkenalan">
+                <span class="g-icon">✌️</span>
+                <span class="g-label">Nama Saya</span>
+              </div>
+              <div class="gesture-item" title="Terima Kasih">
+                <span class="g-icon">🖐️</span>
+                <span class="g-label">Thanks</span>
+              </div>
+              <div class="gesture-item" title="Baik">
+                <span class="g-icon">👍</span> <span class="g-label">Baik</span>
+              </div>
+              <div class="gesture-item" title="Tidak">
+                <span class="g-icon">👎</span>
+                <span class="g-label">Tidak</span>
+              </div>
+              <div class="gesture-item" title="Semangat">
+                <span class="g-icon">✊</span>
+                <span class="g-label">Semangat</span>
+              </div>
+              <div class="gesture-item" title="OK">
+                <span class="g-icon">👌</span> <span class="g-label">OK</span>
+              </div>
+              <div class="gesture-item" title="Love">
+                <span class="g-icon">🤟</span> <span class="g-label">Love</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>Built with MediaPipe & Vanilla JS • by Khalifa Ziaul Rahim</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

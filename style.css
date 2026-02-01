@@ -1,0 +1,366 @@
+:root {
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.4);
+  --secondary: #ec4899;
+  --dark-bg: #0f172a;
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden; /* Prevent scroll on desktop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Animated Background --- */
+.background-globes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.globe {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 10s infinite alternate;
+}
+
+.globe-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--primary);
+  top: -50px;
+  left: -50px;
+}
+
+.globe-2 {
+  width: 400px;
+  height: 400px;
+  background: var(--secondary);
+  bottom: -100px;
+  right: -100px;
+  animation-delay: 2s;
+}
+
+.globe-3 {
+  width: 200px;
+  height: 200px;
+  background: #3b82f6;
+  top: 40%;
+  left: 40%;
+  animation-duration: 15s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(30px, 50px);
+  }
+}
+
+/* --- Loading Screen --- */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--dark-bg);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--glass-border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Layout --- */
+.app-container {
+  width: 100%;
+  max-width: 1280px;
+  height: 95vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.status-badge {
+  background: var(--glass);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  flex: 1;
+  min-height: 0; /* Fix for nested flex overflow */
+}
+
+/* --- Glass Panel --- */
+.glass-panel {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- Video Section --- */
+.video-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.video-wrapper {
+  flex: 1;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--glass-border);
+}
+
+#input_video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror effect */
+}
+
+#output_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1); /* Mirror effect */
+}
+
+.gesture-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 10px 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gesture-overlay .emoji {
+  font-size: 2rem;
+}
+.gesture-overlay .text {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Sidebar --- */
+.info-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h3 {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.output-card {
+  padding: 24px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.speech-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  flex: 1;
+  border: 1px solid var(--glass-border);
+}
+
+.guide-card {
+  padding: 24px;
+  flex: 1;
+}
+
+.gesture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+.gesture-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.gesture-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+}
+
+.g-icon {
+  font-size: 1.5rem;
+}
+.g-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .app-container {
+    height: auto;
+    overflow-y: auto;
+  }
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+}
