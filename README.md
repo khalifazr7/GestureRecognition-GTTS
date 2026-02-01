@@ -45,7 +45,7 @@ Pastikan Anda sudah menginstall Python 3.10 ke atas.
 1. **Clone Repository**
 
    ```bash
-   git clone https://github.com/username/GestureRecognition-GTTS.git
+   git clone https://github.com/khalifazr7/GestureRecognition-GTTS.git
    cd GestureRecognition-GTTS
    ```
 
