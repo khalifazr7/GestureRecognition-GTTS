@@ -1,0 +1,6 @@
+[build]
+  command = ""
+  publish = "."
+
+[dev]
+  command = "python -m http.server"
